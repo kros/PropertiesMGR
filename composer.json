@@ -1,5 +1,5 @@
 {
-   "name": "kros/PropertiesMGR",
+   "name": "kros/properties-mgr",
    "version": "1.0.0",
    "description" : "Load properties from a property / init file as properties in an object.",
 	"homepage" : "https://github.com/kros/PropertiesMGR",
