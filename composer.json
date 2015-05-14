@@ -1,10 +1,19 @@
 {
    "name": "kros/PropertiesMGR",
-   "version": "1.0.0"
-   "repositories": [
-      {
-         "type": "vcs",
-         "url": "https://github.com/kros/PropertiesMGR"
-      }
-   ]
+   "version": "1.0.0",
+   "description" : "Load properties from a property / init file as properties in an object.",
+	"homepage" : "https://github.com/kros/PropertiesMGR",
+	"license" : "GNU Version 2",
+	"authors" : [{
+			"name" : "Oscar Ruiz",
+			"email" : "ormartin@gmail.com",
+			"homepage" : "https://github.com/kros",
+			"role" : "Developer"
+		}
+	],
+	"keywords" : [
+		"properties",
+		"resources",
+		"settings"
+	]   
 }
