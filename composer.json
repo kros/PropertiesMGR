@@ -10,6 +10,9 @@
 			"role" : "Developer"
 		}
 	],
+	"autoload": {
+	   "psr-4": {"kros\\": "src/"}
+	},
 	"keywords" : [
 		"properties",
 		"resources",
