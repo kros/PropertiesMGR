@@ -1,2 +1,2 @@
 # PropertiesMGR
-Load properties in a init /property file as properties in an object.
+Load properties from property / init file as properties in an object.
