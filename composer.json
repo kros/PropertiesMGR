@@ -11,7 +11,7 @@
 		}
 	],
 	"autoload": {
-	   "psr-0": {"Kros\\PropertiesMGR\\": "src/"}
+	   "psr-4": {"Kros\\PropertiesMGR\\": "src/"}
 	},
 	"keywords" : [
 		"properties",
