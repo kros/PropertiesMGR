@@ -7,6 +7,16 @@ use Kros\PropertiesMGR\PropertyNotFoundException;
 
 /**
  * Represents an object with one property for each key in a key/value pairs file.
+ * The file shoud have the following structure:
+ * 
+ *    ; comentario
+ *   
+ *    [seccion1]
+ *    hola=caracola
+ *    adios=caracol
+ *    [seccion2]
+ *    prop1=valor1
+ *    prop2=valor2
  */
 class Properties{
 	private $fileName;
@@ -26,29 +36,25 @@ class Properties{
 		$this->fileName = $fileName;
 		$this->properties = parse_ini_file($this->fileName, $sections);
 	}
+	
 	/**
 	 * Get the file name used to build the object
 	 */
 	public function getFileName(){
 		return $this->fileName;
-	} 
-	/**
-	 * Get a property in the object
-	 * 
-	 * @param string $name Name of the property. When using seccions, each property is an array,
-	 *                     So the way to get a property value is like this:
-	 *                     value = object->section['key']
-	 * @throws PropertyNotFoundException
-	 */
+	}
+	
 	public function __get($name) {
         if (array_key_exists($name, $this->properties))
             return $this->properties[$name];
         else 
         	throw  new PropertyNotFoundException("Property '$name' not found");
 	}
+	
     public function __isset($name) {
         return array_key_exists($name, $this->properties);
-    }		
+    }	
+    	
 	/**
 	 * Get a property in the object
 	 * 
