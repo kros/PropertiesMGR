@@ -21,6 +21,7 @@ use Kros\PropertiesMGR\PropertyNotFoundException;
 class Properties{
 	private $fileName;
 	private $properties=array();
+	private $sections;
 	
 	/**
 	 * Construct method
@@ -32,12 +33,12 @@ class Properties{
 	 *                    seccions, each property is a Properties object, So the way to get a property value is like this:
 	 *                    value = object->section->key.
 	 */
-	public function __construct($fileName, $sections = FALSE){
-		if (is_array($fileName)){
-			$this->fileName=null;
-			$this->properties=$fileName;
+	public function __construct($fileName, $sections = FALSE, $props = null){
+		$this->fileName = $fileName;
+		$this->sections = $sections;
+		if ($props!=null && is_array($props)){
+			$this->properties=$props;
 		}else{
-			$this->fileName = $fileName;
 			$this->properties = parse_ini_file($this->fileName, $sections);
 		}
 	}
@@ -52,7 +53,7 @@ class Properties{
 	public function __get($name) {
         if (array_key_exists($name, $this->properties))
 			if (is_array($this->properties[$name])){
-				return new Properties($this->properties[$name]);
+				return new Properties($this->fileName, $this->sections, $this->properties[$name]);
 			}else{
 				return $this->properties[$name];
 			}
