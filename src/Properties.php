@@ -25,16 +25,21 @@ class Properties{
 	/**
 	 * Construct method
 	 * 
-	 * @param string $fileName File name containing the key/value pairs to be loaded.
+	 * @param string $fileName File name containing the key/value pairs to be loaded or an array of properties.
 	 * @param boolean $sections Optional. If True, each property in the object is a secction of the file.
 	 *                          Every key/value pair is an array element in the right section property. 
 	 * @return Properties Return a Properies object filled with the data in the file $fileName. When using
-	 *                    seccions, each property is an array, So the way to get a property value is like this:
-	 *                    value = object->section['key'].
+	 *                    seccions, each property is a Properties object, So the way to get a property value is like this:
+	 *                    value = object->section->key.
 	 */
 	public function __construct($fileName, $sections = FALSE){
-		$this->fileName = $fileName;
-		$this->properties = parse_ini_file($this->fileName, $sections);
+		if (is_array($fileName)){
+			$this->fileName=null;
+			$this->properties=$fileName;
+		}else{
+			$this->fileName = $fileName;
+			$this->properties = parse_ini_file($this->fileName, $sections);
+		}
 	}
 	
 	/**
@@ -46,7 +51,11 @@ class Properties{
 	
 	public function __get($name) {
         if (array_key_exists($name, $this->properties))
-            return $this->properties[$name];
+			if (is_array($this->properties[$name])){
+				return new Properties($this->properties[$name]);
+			}else{
+				return $this->properties[$name];
+			}
         else 
         	throw  new PropertyNotFoundException("Property '$name' not found");
 	}
@@ -62,6 +71,13 @@ class Properties{
 	 */
     public function getProperty($name){
 		return $this->$name;
+	}
+	
+	/**
+	* Return the array of properties
+	*/
+	public function asArray(){
+		return $this->properties;
 	}
 }
 ?>
