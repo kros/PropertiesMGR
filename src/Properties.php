@@ -61,16 +61,16 @@ class Properties{
         	throw  new PropertyNotFoundException("Property '$name' not found");
 	}
 	
-    public function __isset($name) {
-        return array_key_exists($name, $this->properties);
-    }	
+ 	public function __isset($name) {
+		return array_key_exists($name, $this->properties);
+	}	
     	
 	/**
 	 * Get a property in the object
 	 * 
 	 * @param string $name Name of the property.
 	 */
-    public function getProperty($name){
+	public function getProperty($name){
 		return $this->$name;
 	}
 	
